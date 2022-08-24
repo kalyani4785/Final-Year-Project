@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Sales & Inventory</title>
+    <style>
+        .heading {
+            color: rgb(58, 58, 58);
+            text-shadow: 1px 1px 5px rgb(255, 255, 255), 0 0 25px rgb(255, 255, 255), 0 0 5px rgb(0, 0, 78);
+
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .button1 {
+            background-color: rgba(31, 135, 219, 0.945);
+            padding: 16px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            height: 90px;
+            width: 330px;
+            border: 5px solid #ffffff;
+            border-radius: 50px;
+        }
+
+        .button1:hover {
+            color: white;
+            border: 10px solid white;
+        }
+
+        body::after {
+            content: "";
+            background: url("{% static 'images/homepage.gif'%}");
+            border: 0.9;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <br><br><br><br><br>
+    <center>
+        <h1 class="heading">Welcome to Automated Sales & Inventory Management System</h1>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <button class="button1" onclick="location.href='{% url 'login' %} '"><strong>Goto Sales Dashboard</strong></button>
+        <br>
+        <h6>You're good to go.</h6>
+    </center>
+
+</body>
+
+</html>

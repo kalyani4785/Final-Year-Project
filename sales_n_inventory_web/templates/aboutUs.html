@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <style>
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.671), rgba(255, 255, 255, 0.742)),
+            url("{% static 'images/about.jpg'%}");
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-shadow: 1px 1px 15px #f5f2a3;
+        }
+
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .avatar2 {
+            vertical-align: middle;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        #about_app {
+            font-size: large;
+        }
+
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <center>
+        <h1>About Us</h1>
+        <br>
+        <br>
+        <h3 id="about_app">This web application is created as a part of final year project.</h3>
+        <h3 id="about_app">This project is created by Group-12 members:</h3>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <img src="{% static 'images/about/avatar_m.png'%}" alt="Saurav Kumar" class="avatar">
+                </td>
+                <td></td>
+                <td>
+                    <img src="{% static 'images/about/avatar_m.png'%}" alt="Shekhar Kumar" class="avatar">
+                </td>
+                <td></td>
+                <td>
+                    <img src="{% static 'images/about/avatar_f.jpg'%}" alt="Kalyani Kumari" class="avatar">
+                </td>
+                <td></td>
+                <td>
+                    <img src="{% static 'images/about/avatar_m.png'%}" alt="Vivek Kumar" class="avatar">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h3 id="about_app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saurav
+                        Kumar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </td>
+                <td></td>
+                <td>
+                    <h3 id="about_app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shekhar
+                        Kumar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </td>
+                <td></td>
+                <td>
+                    <h3 id="about_app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kalyani
+                        Kumari&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </td>
+                <td></td>
+                <td>
+                    <h3 id="about_app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vivek
+                        Kumar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <h3 id="about_app">Under the guidance of:</h3>
+        <br>
+        <img src="{% static 'images/about/guide.png'%}" alt="guide" class="avatar2">
+        <h3 id="about_app">Mrs. Ranu Sarkar</h3>
+        <h3 id="about_app">DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING</h3>
+
+
+    </center>
+
+</body>
+
+</html>

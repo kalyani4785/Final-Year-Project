@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>In-Stock</title>
+
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 30%;
+        }
+
+        /* specify background image url below inside url() tag: */
+
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.281), rgba(255, 255, 255, 0.27)),url("{% static 'images/background.jpg'%}");
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-shadow: 10px 10px 15px #0c35ed;
+            color: white;
+        }
+
+        table {
+            background-color: #dcfdfb;
+            text-align: center;
+        }
+
+        th {
+            background-color: cornsilk;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #e0dfdf;
+        }
+
+        #len {
+            color: rgb(0, 255, 255);
+        }
+    </style>
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css\dashboard\card.css'%}"> -->
+
+</head>
+
+<body">
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <center>
+        <h1>In-Stock Items</h1>
+        <h1 id="len">{{ length }}</h1>
+        <br>
+        <table border="5">
+            <tr>
+                <th>&nbsp;&nbsp; S.No. &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Item Name &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Category &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Brand &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Rate (INR) &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Quantity &nbsp;&nbsp;</th>
+            </tr>
+
+            {% for i in data %}
+            <tr>
+                <td>&nbsp;&nbsp; {{ forloop.counter }} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.item_name}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.category}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.brand}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.price_per_item}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.quantity}} &nbsp;&nbsp;</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+
+    </body>
+
+</html>

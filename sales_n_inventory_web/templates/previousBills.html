@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Previous Bills</title>
+
+    <style>
+        /* specify background image url below inside url() tag: */
+
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.281), rgba(255, 255, 255, 0.27)),
+            url("{% static 'images/background.jpg'%}");
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-shadow: 10px 10px 15px #0c35ed;
+            color: white;
+        }
+
+        table {
+            background-color: #dcfdfb;
+            text-align: center;
+        }
+
+        th {
+            background-color: cornsilk;
+        }
+
+        /* tr:nth-child(odd) {
+            background-color: #e0dfdf;
+        } */
+
+        #len {
+            color: rgb(0, 255, 255);
+        }
+
+        input {
+            text-align: center;
+        }
+    </style>
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css\dashboard\card.css'%}"> -->
+
+</head>
+
+<body">
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <center>
+        <h1>Previous Bills</h1>
+        <h1 id="len">{{ length }}</h1>
+        <br>
+        <table border="5">
+            <tr>
+                <th>&nbsp;&nbsp; S.No. &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Customer Mobile &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Bill Date &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Total Amount Paid (₹) &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Action &nbsp;&nbsp;</th>
+            </tr>
+            {% for i in data %}
+            <form method="POST">
+                {% csrf_token %}
+                <tr>
+                    <td><input type="text" name="sno" value="{{ forloop.counter }}" readonly></td>
+                    <td><input type=" text" name="mobile{{ forloop.counter }}" value="{{i.customer_mobile}}" readonly>
+                    </td>
+                    <td><input type="text" name="date_{{ forloop.counter }}" value="{{i.bill_date}}" readonly></td>
+                    <td>&nbsp;&nbsp; {{i.total_paid}} &nbsp;&nbsp;</td>
+                    <td><input type="submit" id="btn{{ forloop.counter }}" value="View Bill"></td>
+                </tr>
+            </form>
+            {% endfor %}
+        </table>
+    </center>
+
+
+    </body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+{%if msg%}
+<script>
+    window.alert('{{msg}}');
+</script>
+{% endif%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-image: url();
+        }
+
+        input[type="submit"] {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 150px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <br><br><br><br><br>
+    <!-- <div class="back">
+        <a href="/"><i class='fas fa-arrow-left' style='font-size:22px'></i>Return to Home</a>
+    </div> -->
+    <center>
+        <div class="container">
+            <div class="inner">
+                <h1>Forgot Password? Reset Your Password</h1><br>
+                <img src="https://c.neh.tw/thumb/f/720/5b5b8f3ff3684af39ffa.jpg" width="150"><br>
+                <form action="/postReset/" method="POST">
+                    {% csrf_token %}
+                    <h4>Enter your registered email here to which the password reset link will be sent:</h4>
+                    <input type="email" name="email" id="email" placeholder="Enter your email"
+                        required ><br><br>
+                    <input type="submit" value="Send Reset Link">
+                </form>
+            </div>
+        </div>
+    </center>
+
+</body>
+
+</html>

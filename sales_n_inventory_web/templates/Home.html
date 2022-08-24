@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Dashboard</title>
+
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgb(50, 0, 250);
+            transition: 0.5s;
+            width: 30%;
+            color: #00478e;
+        }
+
+        /* specify background image url below inside url() tag: */
+
+        body {
+            background-image: url("{% static 'images/dashboard_background.jpg'%}");
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-shadow: 1px 1px 15px #a3f5ef;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css\dashboard\card.css'%}">
+
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <center>
+        <br>
+        <h1>Welcome to Sales Dashboard !</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table>
+
+            <tr>
+                <td>
+                    <a href="/newBill">
+                        <div class="card">
+                            <br>
+                            <center><img src="{% static 'images/dashboard/add.png'%}" alt="" style="width:50%">
+                                <div class="container">
+                                    <h3><b>Generate New Bill</b></h3>
+                                </div>
+                            </center>
+                        </div>
+                    </a>
+                </td>
+
+                <td>
+                    <a href="/inStock">
+                        <div class="card">
+                            <br>
+                            <center><img src="{% static 'images/dashboard/stocks.png'%}" alt="" style="width:45%">
+                                <div class="container">
+                                    <h3><b>View In-Stock Items</b></h3>
+                                </div>
+                            </center>
+                        </div>
+                    </a>
+                </td>
+
+                <td>
+                    <a href="/bills">
+                        <div class="card">
+                            <br>
+                            <center><img src="{% static 'images/dashboard/view.jpg'%}" alt="" style="width:50%">
+                                <div class="container">
+                                    <h3><b>View Previous Bills</b></h3>
+                                </div>
+                            </center>
+                        </div>
+                    </a>
+                </td>
+
+
+    </center>
+    </tr>
+
+    </table>
+
+    </center>
+
+</body>
+
+</html>

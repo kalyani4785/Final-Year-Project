@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paytm Quick Payment Gateway</title>
+
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            width: 100%;
+            opacity: 100%;
+        }
+
+        #hr1 {
+
+            color: rgb(0, 229, 255);
+        }
+
+        body {
+            background-image: url("{% static 'images/payment/paytm_background.png'%}");
+
+        }
+
+        hr {
+            height: 1px;
+            background-color: rgba(0, 174, 255, 0.205);
+            border: none;
+        }
+    </style>
+
+    <!-- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'> -->
+
+</head>
+
+<body>
+    <center>
+        <p>Do not go back or refresh this page.</p>
+        <a href="/login">
+            <button id="confirm" onclick="confirmPay()"><b>Confirm Payment ₹{{ tot }}</b></button>
+        </a>
+        <br>
+        <br>
+        <br>
+        <div class="card">
+            <center>
+                <img src="{% static 'images/payment/paytm_for_upi.png'%}" alt="" style="width:15%">
+                <div class="container">
+
+                </div>
+            </center>
+
+            <img src="{% static 'images/payment/qr.png'%}" alt="" style="width:18%;">
+            <br>
+            <br>
+            <img src="{% static 'images/payment/seal.png'%}" alt="" style="width:7%;">
+            <br>
+            <br>
+            <img src="{% static 'images/payment/hr.jpg'%}" alt="" style="width:100%; height: 10%;">
+
+        </div>
+    </center>
+
+    <script>
+
+        function confirmPay() {
+            // Swal.fire("Payment Confirmed!", "", "success");
+            alert("Payment Confirmed!");
+        }
+
+    </script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script> -->
+
+</body>
+
+</html>

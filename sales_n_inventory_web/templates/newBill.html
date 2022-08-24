@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New Bill</title>
+
+    <style>
+        #bodybackground {
+            background-image: url("{% static 'images/newBill_background.jpg'%}");
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 30%;
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .proceed_btn {
+            background-color: rgba(0, 48, 204, 0.848);
+            color: white;
+            width: 250;
+            height: 250;
+            border-radius: 50px;
+            font-size: larger;
+        }
+
+        h1 {
+            text-shadow: 1px 1px 15px #a3f5ef;
+        }
+
+        #date {
+            color: red;
+        }
+
+        h6 {
+            position: absolute;
+            align-content: center;
+            margin-left: 10%;
+        }
+
+        #list {
+            margin-left: 70%;
+            position: relative;
+            align-content: space-around;
+        }
+
+        table {
+            background-color: #dcfdfb;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        #total {
+            color: firebrick;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css\dashboard\card.css'%}">
+
+</head>
+
+<body id="bodybackground">
+    {% include "navbar.html" %}
+
+    <br><br><br><br>
+    <center>
+        <h1>Generate New Bill</h1>
+        <br>
+        <h6 id="date"></h6>
+
+        <div id="list">
+            <select name="items" id="items">
+                {% for i in data %}
+                <option value="{{ i }}" id="{{ i.item_name }}">{{ i.item_name }}</option>
+                {% endfor %}
+            </select>
+            <button id="add" onclick="addItem()">Add Item</button>
+        </div>
+
+        <input type="submit" value="Print Bill" onclick="window.print()">
+        <br>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter customer's mobile" name="mobile" required>
+            <br>
+            <br>
+            <table border="5" id="bill">
+                <tr>
+                    <th>&nbsp;&nbsp; S.No. &nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp; Item Name &nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp; Brand &nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp; Rate (₹) &nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp; Quantity &nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp; Amount (₹) &nbsp;&nbsp;</th>
+                </tr>
+            </table>
+            <br>
+            <h4 id="total"></h4>
+            <br><br>
+            <input type="submit" value=" Proceed for Payment " onclick="" class="proceed_btn">
+            <br><br>
+
+        </form>
+    </center>
+
+    <script>
+        var global_data;
+        var txt5;
+        var txt6;
+
+        sno = 1;
+
+        function addItem() {
+
+            e = document.getElementById('items');
+
+            //formatting for json string
+            str1 = String(e.value);
+            str = str1.split("\'").join("\"");
+            splitted = str.split(",");
+            newStrArr = [];
+            for (let k = 0; k < splitted.length; k++) {
+                if (!splitted[k].includes("date_modified"))
+                    newStrArr.push(splitted[k]);
+            }
+
+            finalStrArr = []
+
+            for (let k = 0; k < newStrArr.length; k++) {
+                if (newStrArr[k].includes("\""))
+                    finalStrArr.push(newStrArr[k]);
+            }
+
+            str = finalStrArr.join(" , ");
+            str = str.split("{").join(" ");
+            str = str.split("}").join(" ");
+            str = "{" + str + "}";
+
+            //parsing str to json
+            const data = JSON.parse(str);
+            global_data = data;
+            optionId = data.item_name;
+
+            sel = document.getElementById(optionId);
+
+
+            tab = document.getElementById('bill');
+
+            row = document.createElement('tr');
+            tab.appendChild(row);
+
+            col1 = document.createElement('td');
+            col2 = document.createElement('td');
+            col3 = document.createElement('td');
+            col4 = document.createElement('td');
+            col5 = document.createElement('td');
+            col6 = document.createElement('td');
+
+
+            txt2 = document.createElement('input');
+            txt2.setAttribute('type', 'text');
+            txt2.setAttribute('readonly', "");
+            txt2.setAttribute('name', "item_name" + sno);
+            col2.appendChild(txt2);
+
+            txt3 = document.createElement('input');
+            txt3.setAttribute('type', 'text');
+            txt3.setAttribute('readonly', "");
+            txt3.setAttribute('name', "brand" + sno);
+            col3.appendChild(txt3);
+
+            txt4 = document.createElement('input');
+            txt4.setAttribute('type', 'text');
+            txt4.setAttribute('readonly', "");
+            txt4.setAttribute('name', "price_per_item" + sno);
+            col4.appendChild(txt4);
+
+            txt5 = document.createElement('input');
+            txt5.setAttribute('type', 'number');
+            // txt5.setAttribute('readonly', "");
+            txt5.setAttribute('name', "quantity" + sno);
+            txt5.setAttribute('id', "quantity" + sno);
+            txt5.setAttribute('oninput', 'onInputQuantity()');
+            col5.appendChild(txt5);
+
+            txt6 = document.createElement('input');
+            txt6.setAttribute('type', 'text');
+            txt6.setAttribute('readonly', "");
+            txt6.setAttribute('name', "amount" + sno);
+            txt6.setAttribute('class', "amt");
+            col6.appendChild(txt6);
+
+
+            col1.textContent = sno;
+            txt2.value = data.item_name;
+            txt3.value = data.brand;
+            txt4.value = data.price_per_item;
+            txt5.value = "1";
+            txt6.value = data.price_per_item * Number(txt5.value);
+
+            row.appendChild(col1);
+            row.appendChild(col2);
+            row.appendChild(col3);
+            row.appendChild(col4);
+            row.appendChild(col5);
+            row.appendChild(col6);
+
+
+            //total amount calculation
+            amt_e = document.getElementsByClassName("amt");
+            tot_amt = 0;
+            for (let k = 0; k < amt_e.length; k++) {
+                tot_amt += Number(amt_e[k].value);
+            }
+
+            total_e = document.getElementById("total");
+            total_e.innerHTML = "Total Bill Amount: ₹ " + tot_amt;
+
+
+            sno++;
+        }
+
+        //function onkeypress OR oninput -> onInputQuantity()
+        function onInputQuantity() {
+            if (Number(txt5.value) > global_data.quantity) {
+                alert(`Available quantity of ${global_data.item_name} is ${global_data.quantity}.`);
+                txt5.value = global_data.quantity;
+            }
+            else if (Number(txt5.value) <= 0) {
+                alert(`Atleast 1 quantity is required. [*Max-Quantity of "${global_data.item_name}": ${global_data.quantity} ]`);
+                txt5.value = 1;
+            }
+            txt6.value = global_data.price_per_item * Number(txt5.value);
+
+
+            //total amount calculation
+            amt_e = document.getElementsByClassName("amt");
+            tot_amt = 0;
+            for (let k = 0; k < amt_e.length; k++) {
+                tot_amt += Number(amt_e[k].value);
+            }
+
+            total_e = document.getElementById("total");
+            total_e.innerHTML = "Total Bill Amount: ₹ " + tot_amt;
+
+        }
+
+
+
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+        if (String(d).length == 1)
+            d = "0" + d;
+
+        if (String(m).length == 1)
+            m = "0" + m;
+
+        document.getElementById("date").innerHTML = "*Billing Date: " + d + "-" + m + "-" + y;
+
+
+    </script>
+
+</body>
+
+</html>

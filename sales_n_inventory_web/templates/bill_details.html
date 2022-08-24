@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Details</title>
+
+    <style>
+        /* specify background image url below inside url() tag: */
+
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.281), rgba(255, 255, 255, 0.27)),
+            url("{% static 'images/background.jpg'%}");
+        }
+
+        button {
+            background-color: rgba(7, 179, 185, 0.753);
+            color: white;
+            width: 90px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-shadow: 10px 10px 15px #0c35ed;
+            color: white;
+        }
+
+        table {
+            background-color: #dcfdfb;
+            text-align: center;
+        }
+
+        th {
+            background-color: cornsilk;
+        }
+
+        /* tr:nth-child(odd) {
+            background-color: #e0dfdf;
+        } */
+
+        #len {
+            color: rgb(0, 255, 255);
+        }
+
+        input {
+            text-align: center;
+        }
+
+        #transparent {
+            background-color: rgb(255, 233, 123);
+            color: rgba(0, 0, 0, 0.749);
+            font-size: large;
+        }
+
+        #row_body {
+            background-color: rgba(255, 233, 123, 0.193);
+            color: rgba(0, 0, 0, 0.749);
+            font-size: large;
+        }
+    </style>
+
+</head>
+
+<body">
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <center>
+        <h1>Bill Details</h1>
+        <br>
+        <br>
+        <table id="" border="1">
+            <tr id="transparent">
+                <th id="transparent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Billing Date:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th id="transparent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Customer Mobile:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th id="transparent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Total Amount Paid:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+            <tr id="row_body">
+                <td id="row_body">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{bill_info.bill_date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td id="row_body">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    +91-{{bill_info.customer_mobile}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td id="row_body">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ₹{{bill_info.total_paid}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        </table>
+        <br>
+        <table border="5">
+            <tr>
+                <th>&nbsp;&nbsp; S.No. &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Item Name &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Brand &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Rate (₹) &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Quantity &nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp; Amount (₹) &nbsp;&nbsp;</th>
+            </tr>
+            {% for i in dataComb %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>&nbsp;&nbsp; {{ i.0}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.1}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.2}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.3}} &nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp; {{i.4}} &nbsp;&nbsp;</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+
+        <input type="submit" value="Print Bill" onclick="window.print()">
+    </center>
+
+
+    </body>
+
+</html>
